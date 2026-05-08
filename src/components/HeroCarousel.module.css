@@ -1,0 +1,519 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: calc(100svh - 110px);
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── ORBS ── */
+.orb1 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  top: -150px;
+  right: -100px;
+  filter: blur(120px);
+  opacity: 0.4;
+  transition: background 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+  animation: orbFloat 9s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb2 {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  bottom: -60px;
+  left: 30%;
+  filter: blur(80px);
+  opacity: 0.3;
+  transition: background 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+  animation: orbFloat 12s ease-in-out infinite reverse;
+  animation-delay: -4s;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-28px) scale(1.04); }
+}
+
+/* ── GRAIN ── */
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* ── SLIDES ── */
+.slidesWrap {
+  position: relative;
+  flex: 1;
+  z-index: 2;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+}
+
+.slideInner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 48px;
+  gap: 40px;
+}
+
+/* Enter animation */
+.enter[data-direction='1'] {
+  animation: enterFromRight 0.85s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.enter[data-direction='-1'] {
+  animation: enterFromLeft 0.85s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+/* Exit animation */
+.exit[data-direction='1'] {
+  animation: exitToLeft 0.85s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.exit[data-direction='-1'] {
+  animation: exitToRight 0.85s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+@keyframes enterFromRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes enterFromLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes exitToLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-60px); }
+}
+@keyframes exitToRight {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(60px); }
+}
+
+/* ── TEXT SIDE ── */
+.textSide {
+  flex: 1;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  transition: color 0.6s;
+  animation: fadeUp 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.eyebrowLine {
+  display: block;
+  width: 28px;
+  height: 1px;
+  transition: background 0.6s;
+}
+
+.title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(56px, 7.5vw, 96px);
+  font-weight: 300;
+  line-height: 0.92;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  animation: fadeUp 0.6s 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.titleLine em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.75;
+  margin-bottom: 28px;
+  max-width: 400px;
+  animation: fadeUp 0.6s 0.26s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.6s 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.chip {
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 30px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #fff;
+  border: none;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.35s ease,
+              background 0.6s;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.btnGhost {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.45);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.25s;
+}
+
+.btnGhost:hover { color: #fff; }
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  animation: fadeUp 0.6s 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.priceSub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* ── VISUAL SIDE ── */
+.visualSide {
+  flex: 0 0 420px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  animation: scaleIn 0.8s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.productCard {
+  position: relative;
+  width: 320px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: border-color 0.9s;
+}
+
+.glowRing {
+  position: absolute;
+  inset: -40px;
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.9s;
+}
+
+.productVisual {
+  position: relative;
+  z-index: 1;
+  padding: 40px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 440px;
+  transition: background 0.9s;
+}
+
+.productEmoji {
+  font-size: 96px;
+  line-height: 1;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.productLabel {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  text-align: center;
+  transition: color 0.6s;
+  line-height: 1.2;
+}
+
+.productVariant {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.specPills {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.specPill {
+  padding: 5px 12px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-align: center;
+  transition: border-color 0.6s, color 0.6s;
+}
+
+.cocoaBadge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition: background 0.6s, color 0.6s;
+}
+
+/* Floating dots */
+.floatDot1 {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  top: 30%;
+  left: -20px;
+  opacity: 0.5;
+  transition: background 0.9s;
+  animation: dotFloat1 5s ease-in-out infinite;
+}
+
+.floatDot2 {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  bottom: 25%;
+  right: -16px;
+  opacity: 0.4;
+  transition: background 0.9s;
+  animation: dotFloat2 7s ease-in-out infinite;
+}
+
+@keyframes dotFloat1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes dotFloat2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+/* ── PROGRESS BAR ── */
+.progressWrap {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  z-index: 10;
+}
+
+.progressBar {
+  height: 100%;
+  transition: width 0.1s linear, background 0.9s;
+}
+
+/* ── CONTROLS ── */
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 48px;
+  right: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dot {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  cursor: pointer;
+  transition: width 0.4s cubic-bezier(0.76, 0, 0.24, 1),
+              background 0.6s;
+  width: 22px;
+}
+
+.dotActive {
+  width: 48px;
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  transition: background 0.25s, border-color 0.25s, transform 0.2s;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.08);
+}
+
+/* ── KEYFRAME UTILS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9) translateX(40px); }
+  to   { opacity: 1; transform: scale(1) translateX(0); }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    min-height: auto;
+  }
+
+  .slideInner {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 24px 24px 80px;
+    gap: 24px;
+    justify-content: flex-end;
+  }
+
+  .textSide {
+    max-width: 100%;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .eyebrow { justify-content: center; }
+  .chips { justify-content: center; }
+  .ctaRow { justify-content: center; }
+  .desc { max-width: 100%; font-size: 14px; }
+
+  .visualSide {
+    flex: none;
+    width: 100%;
+    height: 300px;
+  }
+
+  .productCard {
+    width: 220px;
+  }
+
+  .productVisual {
+    min-height: 300px;
+    padding: 24px 20px;
+  }
+
+  .productEmoji { font-size: 64px; }
+
+  .controls {
+    left: 24px;
+    right: 24px;
+    bottom: 16px;
+  }
+
+  .orb1 { width: 300px; height: 300px; right: -80px; top: -60px; }
+  .orb2 { width: 200px; height: 200px; left: 10%; }
+
+  .floatDot1, .floatDot2 { display: none; }
+}
